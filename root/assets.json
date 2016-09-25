@@ -1,8 +1,10 @@
 {
     "js": [
         {
-            "name": "app",
-            "src": []
+            "name": "main",
+            "src": [
+                "js/main.js"
+            ]
         }
     ],
     "vendor": []
