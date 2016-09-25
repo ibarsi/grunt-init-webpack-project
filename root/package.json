@@ -1,0 +1,39 @@
+{
+  "name": "webpack_practice",
+  "title": "Webpack Practice",
+  "version": "0.1.0",
+  "homepage": "index.html",
+  "author": {
+    "name": "Igor Barsi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/ibarsi/webpack_build"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.4.1",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "bower": "^1.7.9",
+    "css-loader": "^0.25.0",
+    "eslint": "^3.6.0",
+    "eslint-loader": "^1.5.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "postcss-color-function": "^2.0.1",
+    "postcss-custom-properties": "^5.0.1",
+    "postcss-import": "^8.1.2",
+    "postcss-loader": "^0.13.0",
+    "postcss-nested": "^1.0.0",
+    "strip-loader": "^0.1.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-merge": "^0.14.1",
+    "webpack-validator": "^2.2.7"
+  },
+  "scripts": {
+    "build": "webpack --config webpack-prod.config.js -p",
+    "build-dev": "webpack --config webpack-dev.config.js",
+    "watch": "webpack --config webpack-dev.config.js --watch"
+  }
+}
