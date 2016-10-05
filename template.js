@@ -46,20 +46,25 @@ exports.template = function(grunt, init, done) {
             "lint": "eslint ./ --cache",
             "build": "webpack --config webpack-prod.config.js -p",
             "build-dev": "webpack --config webpack-dev.config.js",
-            "watch": "webpack --config webpack-dev.config.js --watch"
+            "watch": "webpack --config webpack-dev.config.js --watch",
+            "flow": "flow; test $? -eq 0 -o $? -eq 2"
         };
 
         // NOTE: Must be matched up manually with package.json in /root (it gets overwritten).
         props.devDependencies = {
             "autoprefixer": "^6.4.1",
             "babel-core": "^6.14.0",
+            "babel-eslint": "^6.1.2",
             "babel-loader": "^6.2.5",
+            "babel-plugin-transform-flow-strip-types": "^6.14.0",
             "babel-preset-es2015": "^6.14.0",
             "css-loader": "^0.25.0",
             "bower": "^1.7.9",
             "eslint": "^3.6.0",
             "eslint-loader": "^1.5.0",
+            "eslint-plugin-flowtype": "^2.19.0",
             "extract-text-webpack-plugin": "^1.0.1",
+            "flow-bin": "^0.32.0",
             "postcss-color-function": "^2.0.1",
             "postcss-custom-properties": "^5.0.1",
             "postcss-import": "^8.1.2",
