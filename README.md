@@ -15,6 +15,7 @@ My personal Webpack configuration and workflow for front-end code, initialized v
     * Custom Properties
     * Color Function
     * Autoprefixer
+* Flow
 
 ## How do I get set up? ##
 
