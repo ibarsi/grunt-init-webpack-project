@@ -10,6 +10,14 @@
     "type": "git",
     "url": "https://bitbucket.org/ibarsi/webpack_build"
   },
+  "pre-commit": ["precommit-msg", "lint"],
+  "scripts": {
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+    "lint": "eslint ./ --cache",
+    "build": "webpack --config webpack-prod.config.js -p",
+    "build-dev": "webpack --config webpack-dev.config.js",
+    "watch": "webpack --config webpack-dev.config.js --watch"
+  },
   "devDependencies": {
     "autoprefixer": "^6.4.1",
     "babel-core": "^6.14.0",
@@ -30,10 +38,5 @@
     "webpack": "^1.13.2",
     "webpack-merge": "^0.14.1",
     "webpack-validator": "^2.2.7"
-  },
-  "scripts": {
-    "build": "webpack --config webpack-prod.config.js -p",
-    "build-dev": "webpack --config webpack-dev.config.js",
-    "watch": "webpack --config webpack-dev.config.js --watch"
   }
 }

@@ -38,6 +38,18 @@ exports.template = function(grunt, init, done) {
         init.copyAndProcess(files, props, { noProcess: 'libs/**' });
 
         // NOTE: Must be matched up manually with package.json in /root (it gets overwritten).
+        props["pre-commit"] = ["precommit-msg", "lint"];
+
+        // NOTE: Must be matched up manually with package.json in /root (it gets overwritten).
+        props.scripts = {
+            "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
+            "lint": "eslint ./ --cache",
+            "build": "webpack --config webpack-prod.config.js -p",
+            "build-dev": "webpack --config webpack-dev.config.js",
+            "watch": "webpack --config webpack-dev.config.js --watch"
+        };
+
+        // NOTE: Must be matched up manually with package.json in /root (it gets overwritten).
         props.devDependencies = {
             "autoprefixer": "^6.4.1",
             "babel-core": "^6.14.0",
@@ -58,12 +70,6 @@ exports.template = function(grunt, init, done) {
             "webpack": "^1.13.2",
             "webpack-merge": "^0.14.1",
             "webpack-validator": "^2.2.7"
-        };
-
-        props.scripts = {
-            "build": "webpack --config webpack-prod.config.js -p",
-            "build-dev": "webpack --config webpack-dev.config.js",
-            "watch": "webpack --config webpack-dev.config.js --watch"
         };
 
         // Generate package.json file, used by npm and grunt.
