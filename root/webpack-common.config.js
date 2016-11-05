@@ -16,10 +16,7 @@ const static_path = path.resolve(__dirname, 'static');
 
 // POSTCSS
 const postcssImport = require('postcss-import');
-const postcssNested = require('postcss-nested');
-const postcssCustomProperties = require('postcss-custom-properties');
-const postcssColorFunction = require('postcss-color-function');
-const autoprefixer = require('autoprefixer');
+const postcssNextCSS = require('postcss-cssnext');
 
 // BANNER
 const banner = `
@@ -77,10 +74,7 @@ const config = {
     postcss: function () {
         return [
             postcssImport,
-            postcssNested,
-            postcssCustomProperties,
-            postcssColorFunction,
-            autoprefixer
+            postcssNextCSS
         ];
     },
     resolve: {

@@ -3,3 +3,6 @@
 /bower_components
 /static/dist
 /static/build
+
+# ESLint
+.eslintcache
