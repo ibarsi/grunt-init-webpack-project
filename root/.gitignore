@@ -6,3 +6,7 @@
 
 # ESLint
 .eslintcache
+
+# Istanbul
+/coverage
+/.nyc_output

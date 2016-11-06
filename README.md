@@ -14,6 +14,7 @@ My personal Webpack configuration and workflow for front-end code, initialized v
     * NextCSS
 * Flow
 * Mocha
+* Istanbul
 
 ## How do I get set up? ##
 
@@ -61,3 +62,4 @@ Also, best/funniest Webpack tutorial ever (helped me a ton): https://medium.com/
 # TODOs #
 1. Integrate flow with webpack build (not as a separate command).
 2. Integrate mocha with webpack build (not as a separate command).
+3. Fail if Istanbul coverage is below a certain threshold (~90% maybe).
