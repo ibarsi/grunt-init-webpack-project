@@ -11,11 +11,9 @@ My personal Webpack configuration and workflow for front-end code, initialized v
 * ESLint
 * PostCSS
     * Import
-    * Nesting
-    * Custom Properties
-    * Color Function
-    * Autoprefixer
+    * NextCSS
 * Flow
+* Mocha
 
 ## How do I get set up? ##
 
@@ -59,3 +57,7 @@ npm run watch       // Runs development build workflow and watches for changes.
 Get crackin'
 
 Also, best/funniest Webpack tutorial ever (helped me a ton): https://medium.com/@dtothefp/why-can-t-anyone-write-a-simple-webpack-tutorial-d0b075db35ed#.71afdq2bc
+
+# TODOs #
+1. Integrate flow with webpack build (not as a separate command).
+2. Integrate mocha with webpack build (not as a separate command).
