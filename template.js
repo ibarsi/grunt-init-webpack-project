@@ -38,14 +38,19 @@ exports.template = function(grunt, init, done) {
         init.copyAndProcess(files, props, { noProcess: 'libs/**' });
 
         // NOTE: Must be matched up manually with package.json in /root (it gets overwritten).
-        props["pre-commit"] = ["precommit-msg", "lint"];
+        props["pre-commit"] = [
+            "precommit-msg",
+            "test",
+            "lint"
+        ];
 
         // NOTE: Must be matched up manually with package.json in /root (it gets overwritten).
         props.scripts = {
             "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
             "lint": "eslint ./ --cache",
-            "build": "webpack --config webpack-prod.config.js -p",
-            "build-dev": "webpack --config webpack-dev.config.js",
+            "test": "./node_modules/.bin/mocha --reporter spec --compilers js:babel-core/register static/**/*.test.js",
+            "build": "npm test && npm run flow && webpack --config webpack-prod.config.js -p",
+            "build-dev": "npm test && npm run flow && webpack --config webpack-dev.config.js",
             "watch": "webpack --config webpack-dev.config.js --watch",
             "flow": "flow; test $? -eq 0 -o $? -eq 2"
         };
@@ -56,8 +61,10 @@ exports.template = function(grunt, init, done) {
             "babel-eslint": "^6.1.2",
             "babel-loader": "^6.2.5",
             "babel-plugin-transform-flow-strip-types": "^6.14.0",
+            "babel-polyfill": "^6.16.0",
             "babel-preset-es2015": "^6.14.0",
             "bower": "^1.7.9",
+            "chai": "^3.5.0",
             "css-loader": "^0.25.0",
             "eslint": "^3.6.0",
             "eslint-loader": "^1.5.0",
@@ -65,6 +72,7 @@ exports.template = function(grunt, init, done) {
             "eslint-plugin-react": "^6.5.0",
             "extract-text-webpack-plugin": "^1.0.1",
             "flow-bin": "^0.32.0",
+            "mocha": "^3.1.2",
             "postcss-cssnext": "^2.8.0",
             "postcss-import": "^8.1.2",
             "postcss-loader": "^0.13.0",
