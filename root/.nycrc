@@ -1,0 +1,15 @@
+{
+    "lines": 80,
+    "statements": 80,
+    "functions": 80,
+    "branches": 80,
+    "include": ["static/js/**/*.js"],
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ],
+    "cache": true,
+    "all": true,
+    "sourceMap": true,
+    "check-coverage": true
+}
