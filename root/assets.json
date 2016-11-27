@@ -3,7 +3,7 @@
         {
             "name": "main",
             "src": [
-                "main.js"
+                "modules/main/Main.jsx"
             ]
         }
     ],

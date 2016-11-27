@@ -48,7 +48,7 @@ exports.template = function(grunt, init, done) {
         props.scripts = {
             "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
             "lint": "eslint ./ --cache",
-            "test": "./node_modules/.bin/mocha --reporter spec --compilers js:babel-core/register static/**/*.test.js",
+            "test": "nyc ./node_modules/.bin/mocha --reporter spec --compilers js:babel-core/register static/app/**/*.test.js",
             "build": "npm test && npm run flow && webpack --config webpack-prod.config.js -p",
             "build-dev": "npm test && npm run flow && webpack --config webpack-dev.config.js",
             "watch": "webpack --config webpack-dev.config.js --watch",
@@ -63,6 +63,7 @@ exports.template = function(grunt, init, done) {
             "babel-plugin-transform-flow-strip-types": "^6.14.0",
             "babel-polyfill": "^6.16.0",
             "babel-preset-es2015": "^6.14.0",
+            "babel-preset-react": "^6.16.0",
             "bower": "^1.7.9",
             "chai": "^3.5.0",
             "css-loader": "^0.25.0",
@@ -73,6 +74,7 @@ exports.template = function(grunt, init, done) {
             "extract-text-webpack-plugin": "^1.0.1",
             "flow-bin": "^0.32.0",
             "mocha": "^3.1.2",
+            "nyc": "^8.4.0",
             "postcss-cssnext": "^2.8.0",
             "postcss-import": "^8.1.2",
             "postcss-loader": "^0.13.0",
@@ -81,6 +83,12 @@ exports.template = function(grunt, init, done) {
             "webpack": "^1.13.2",
             "webpack-merge": "^0.14.1",
             "webpack-validator": "^2.2.7"
+        };
+
+        // NOTE: Must be matched up manually with package.json in /root (it gets overwritten).
+        props.dependencies = {
+            "react": "^15.4.1",
+            "react-dom": "^15.4.1"
         };
 
         // Generate package.json file, used by npm and grunt.

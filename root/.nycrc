@@ -3,7 +3,13 @@
     "statements": 80,
     "functions": 80,
     "branches": 80,
-    "include": ["static/app/**/*.js"],
+    "include": [
+      "static/app/**/*.js",
+      "static/app/**/*.jsx"
+    ],
+    "exclude": [
+      "static/app/**/*.test.js"
+    ],
     "require": [
       "babel-register",
       "babel-polyfill"

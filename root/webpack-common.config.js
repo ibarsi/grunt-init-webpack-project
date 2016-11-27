@@ -39,7 +39,7 @@ let entry = !assets || !assets.js ? {} :
         prev[curr.name] = curr.src.map(function (source) {
             if (!source) { return source; }
 
-            return `${ app_path }/${ curr.name }/${ source }`;
+            return `${ app_path }/${ source }`;
         });
 
         return prev;
@@ -59,11 +59,8 @@ const config = {
         ],
         loaders: [
             {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015']
-                }
+                test: /\.(js|jsx)$/,
+                loader: 'babel-loader'
             },
             {
                 test: /\.css$/,
