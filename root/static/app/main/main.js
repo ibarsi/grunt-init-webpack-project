@@ -2,7 +2,7 @@
    MAIN
 ================================================== */
 
-import '../css/main.css';
+import './main.css';
 
 var main = function () {
     return 'MAIN APP';

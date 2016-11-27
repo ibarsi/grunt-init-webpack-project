@@ -12,7 +12,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // PATHS
 const node_modules = path.resolve(__dirname, 'node_modules');
 const bower_components = path.resolve(__dirname, 'bower_components');
-const static_path = path.resolve(__dirname, 'static');
+const app_path = path.resolve(__dirname, 'static', 'app');
 
 // POSTCSS
 const postcssImport = require('postcss-import');
@@ -39,7 +39,7 @@ let entry = !assets || !assets.js ? {} :
         prev[curr.name] = curr.src.map(function (source) {
             if (!source) { return source; }
 
-            return `${ static_path }/${ source }`;
+            return `${ app_path }/${ curr.name }/${ source }`;
         });
 
         return prev;

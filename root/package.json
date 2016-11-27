@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/ibarsi/webpack_build"
+    "url": "https://github.com/ibarsi/grunt-init-webpack-project"
   },
   "pre-commit": [
     "precommit-msg",
@@ -18,7 +18,7 @@
   "scripts": {
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "lint": "eslint ./ --cache",
-    "test": "nyc ./node_modules/.bin/mocha --reporter spec --compilers js:babel-core/register static/**/*.test.js",
+    "test": "nyc ./node_modules/.bin/mocha --reporter spec --compilers js:babel-core/register static/app/**/*.test.js",
     "build": "npm test && npm run flow && webpack --config webpack-prod.config.js -p",
     "build-dev": "npm test && npm run flow && webpack --config webpack-dev.config.js",
     "watch": "webpack --config webpack-dev.config.js --watch",

@@ -12,13 +12,12 @@ const common = require('./webpack-common.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // PATHS
-const static_path = path.resolve(__dirname, 'static');
-const build_path = path.resolve(static_path, 'dist');
+const build_path = path.resolve(__dirname, 'static', 'dist');
 
 const config_prod = {
     output: {
         path: build_path,
-        filename: 'js/[name].min.js'
+        filename: '[name]/[name].min.js'
     },
     module: {
         loaders: [
@@ -29,7 +28,7 @@ const config_prod = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('css/[name].min.css')
+        new ExtractTextPlugin('[name]/[name].min.css')
     ]
 };
 

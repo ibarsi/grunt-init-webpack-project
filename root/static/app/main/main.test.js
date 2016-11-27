@@ -3,7 +3,7 @@
 ================================================== */
 
 import { expect } from 'chai';
-import main from '../main';
+import main from './main';
 
 describe('Main', () => {
     describe('Main Function', () => {
