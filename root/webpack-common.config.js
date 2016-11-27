@@ -84,9 +84,9 @@ const config = {
     plugins: [
         new webpack.BannerPlugin(banner),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'vendor/vendor.min.js',
-            minChunks: Infinity
+            name: 'common',
+            filename: 'common/common.min.js',
+            minChunks: 2
         }),
         new webpack.ResolverPlugin(
             new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(
