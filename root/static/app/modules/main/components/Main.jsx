@@ -4,7 +4,7 @@
 
 import React from 'react';
 
-import Greeting from './components/greeting/Greeting.jsx';
+import Greeting from './greeting/Greeting.jsx';
 import './main.css';
 
 class Main extends React.Component {

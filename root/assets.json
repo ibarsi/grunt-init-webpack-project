@@ -3,9 +3,8 @@
         {
             "name": "main",
             "src": [
-                "modules/main/Main.jsx"
+                "modules/main"
             ]
         }
-    ],
-    "vendor": []
+    ]
 }

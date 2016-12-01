@@ -45,9 +45,6 @@ let entry = !assets || !assets.js ? {} :
         return prev;
     }, {});
 
-// VENDORS
-entry.vendor = !assets || !assets.vendor ? [] : assets.vendor;
-
 const config = {
     entry: entry,
     module: {
@@ -58,6 +55,10 @@ const config = {
             }
         ],
         loaders: [
+            {
+                test: require.resolve('react'),
+                loader: 'expose-loader?React'
+            },
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader'
