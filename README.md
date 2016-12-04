@@ -28,7 +28,7 @@ npm install -g grunt-init
 Install the template into your `~/.grunt-init/` folder.
 
 ```
-git clone git@bitbucket.org:ibarsi/webpack_build.git ~/.grunt-init/webpack-project
+git clone https://github.com/ibarsi/grunt-init-webpack-project ~/.grunt-init/webpack-project
 ```
 
 Issue the `grunt init` command inside of your project.
@@ -62,4 +62,3 @@ Also, best/funniest Webpack tutorial ever (helped me a ton): https://medium.com/
 # TODOs #
 1. Integrate flow with webpack build (not as a separate command).
 2. Integrate mocha with webpack build (not as a separate command).
-3. Fail if Istanbul coverage is below a certain threshold (~90% maybe).

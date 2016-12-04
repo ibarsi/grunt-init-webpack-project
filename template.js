@@ -71,6 +71,7 @@ exports.template = function(grunt, init, done) {
             "eslint-loader": "^1.5.0",
             "eslint-plugin-flowtype": "^2.19.0",
             "eslint-plugin-react": "^6.5.0",
+            "expose-loader": "^0.7.1",
             "extract-text-webpack-plugin": "^1.0.1",
             "flow-bin": "^0.32.0",
             "mocha": "^3.1.2",
