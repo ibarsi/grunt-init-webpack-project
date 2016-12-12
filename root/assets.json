@@ -1,10 +1,13 @@
 {
-    "js": [
+    "modules": [
         {
             "name": "main",
             "src": [
                 "modules/main"
             ]
         }
+    ],
+    "imports": [
+        "pubsub-js"
     ]
 }

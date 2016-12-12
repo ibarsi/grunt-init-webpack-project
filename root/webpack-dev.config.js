@@ -5,6 +5,7 @@
 
 // IMPORTS
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 const common = require('./webpack-common.config.js');
@@ -20,6 +21,11 @@ const config_dev = {
         filename: '[name]/[name].js'
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common',
+            filename: 'common/common.js',
+            minChunks: 2
+        }),
         new ExtractTextPlugin('[name]/[name].css')
     ]
 };

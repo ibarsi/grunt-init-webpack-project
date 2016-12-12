@@ -10,9 +10,7 @@ const pkg = require('./package.json');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // PATHS
-const node_modules = path.resolve(__dirname, 'node_modules');
-const bower_components = path.resolve(__dirname, 'bower_components');
-const app_path = path.resolve(__dirname, 'static', 'app');
+const src_path = path.resolve(__dirname, 'static', 'src');
 
 // POSTCSS
 const postcssImport = require('postcss-import');
@@ -23,7 +21,6 @@ const banner = `
 =====
 Title: ${ pkg.title }
 Version: ${ pkg.version }
-Author: ${ pkg.author.name }
 Repository: ${ pkg.repository.url }
 Date: ${ new Date().toISOString() }
 =====
@@ -32,14 +29,14 @@ Date: ${ new Date().toISOString() }
 // ASSETS
 const assets = require('./assets.json');
 
-let entry = !assets || !assets.js ? {} :
-    assets.js.reduce((prev, curr) => {
+let entry = !assets || !assets.modules ? {} :
+    assets.modules.reduce((prev, curr) => {
         if (!prev || !curr || !curr.name || !curr.src) { return prev; }
 
         prev[curr.name] = curr.src.map(function (source) {
             if (!source) { return source; }
 
-            return `${ app_path }/${ source }`;
+            return `${ src_path }/${ source }`;
         });
 
         return prev;
@@ -49,19 +46,15 @@ const config = {
     entry: entry,
     module: {
         preLoaders: [
-            {
-                test: /\.js$/,
-                loader: 'eslint-loader'
-            }
         ],
         loaders: [
             {
-                test: require.resolve('react'),
-                loader: 'expose-loader?React'
-            },
-            {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.js$/,
+                loader: 'eslint-loader'
             },
             {
                 test: /\.css$/,
@@ -76,22 +69,17 @@ const config = {
         ];
     },
     resolve: {
-        extensions: ['', '.js'],
+        extensions: ['', '.js', '.jsx'],
         modulesDirectories: [
-            node_modules,
-            bower_components
+            'node_modules',
+            'bower_components'
         ]
     },
     plugins: [
         new webpack.BannerPlugin(banner),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'common',
-            filename: 'common/common.min.js',
-            minChunks: 2
-        }),
         new webpack.ResolverPlugin(
             new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(
-                'bower.json', ['main']
+                'bower.json', Object.keys(entry)
             )
         )
     ]

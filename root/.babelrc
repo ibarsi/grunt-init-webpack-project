@@ -5,5 +5,17 @@
     "presets": [
         "es2015",
         "react"
-    ]
+    ],
+    "env": {
+        "server": {
+            "plugins": [
+                [
+                    "babel-plugin-transform-require-ignore",
+                    {
+                        "extensions": [".css"]
+                    }
+                ]
+            ]
+        }
+    }
 }

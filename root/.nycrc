@@ -8,11 +8,11 @@
       ".jsx"
     ],
     "include": [
-      "static/app/**/*.js",
-      "static/app/**/*.jsx"
+      "static/src/**/*.js",
+      "static/src/**/*.jsx"
     ],
     "exclude": [
-      "static/app/**/*.test.js"
+      "static/src/**/*.test.js"
     ],
     "require": [
       "babel-register",

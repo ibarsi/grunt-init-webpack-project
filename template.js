@@ -48,11 +48,15 @@ exports.template = function(grunt, init, done) {
         props.scripts = {
             "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
             "lint": "eslint ./ --cache",
-            "test": "nyc ./node_modules/.bin/mocha --reporter spec --compilers js:babel-core/register static/app/**/*.test.js",
-            "build": "npm test && npm run flow && webpack --config webpack-prod.config.js -p",
-            "build-dev": "npm test && npm run flow && webpack --config webpack-dev.config.js",
-            "watch": "webpack --config webpack-dev.config.js --watch",
-            "flow": "flow; test $? -eq 0 -o $? -eq 2"
+            "test": "mocha --reporter spec --compilers js:babel-register --require ignore-styles static/src/**/*.test.js",
+            "build": "npm test && flow && npm run build:dev && npm run build:server && npm run build:prod",
+            "build:dev": "webpack --config webpack-dev.config.js",
+            "build:prod": "webpack --config webpack-prod.config.js -p",
+            "build:server": "webpack --config webpack-server.config.js -p",
+            "watch": "npm run watch:dev | npm run watch:server | npm run watch:prod",
+            "watch:dev": "npm run build:dev -- --watch",
+            "watch:prod": "npm run build:prod -- --watch",
+            "watch:server": "npm run build:server -- --watch"
         };
 
         // NOTE: Must be matched up manually with package.json in /root (it gets overwritten).
@@ -61,12 +65,15 @@ exports.template = function(grunt, init, done) {
             "babel-eslint": "^6.1.2",
             "babel-loader": "^6.2.5",
             "babel-plugin-transform-flow-strip-types": "^6.14.0",
+            "babel-plugin-transform-require-ignore": "0.0.2",
             "babel-polyfill": "^6.16.0",
             "babel-preset-es2015": "^6.14.0",
             "babel-preset-react": "^6.16.0",
+            "babel-register": "^6.18.0",
             "bower": "^1.7.9",
             "chai": "^3.5.0",
             "css-loader": "^0.25.0",
+            "enzyme": "^2.6.0",
             "eslint": "^3.6.0",
             "eslint-loader": "^1.5.0",
             "eslint-plugin-flowtype": "^2.19.0",
@@ -74,11 +81,16 @@ exports.template = function(grunt, init, done) {
             "expose-loader": "^0.7.1",
             "extract-text-webpack-plugin": "^1.0.1",
             "flow-bin": "^0.32.0",
+            "ignore-styles": "^5.0.1",
+            "imports-loader": "^0.7.0",
+            "jsdom": "^9.8.3",
             "mocha": "^3.1.2",
+            "mocha-jsdom": "^1.1.0",
             "nyc": "^8.4.0",
             "postcss-cssnext": "^2.8.0",
             "postcss-import": "^8.1.2",
             "postcss-loader": "^0.13.0",
+            "react-addons-test-utils": "^15.4.1",
             "strip-loader": "^0.1.2",
             "style-loader": "^0.13.1",
             "webpack": "^1.13.2",
@@ -88,6 +100,7 @@ exports.template = function(grunt, init, done) {
 
         // NOTE: Must be matched up manually with package.json in /root (it gets overwritten).
         props.dependencies = {
+            "pubsub-js": "^1.5.4",
             "react": "^15.4.1",
             "react-dom": "^15.4.1"
         };

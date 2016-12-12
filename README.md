@@ -46,19 +46,4 @@ Open project folder and install npm packages:
 npm install
 ```
 
-Build tasks are configured via npm scripts (can be seen in `package.json`).
-
-```
-npm run build       // Runs production build workflow.
-npm run build-dev   // Runs development build workflow.
-npm run watch       // Runs development build workflow and watches for changes.
-```
-
-## That's it! ##
-Get crackin'
-
-Also, best/funniest Webpack tutorial ever (helped me a ton): https://medium.com/@dtothefp/why-can-t-anyone-write-a-simple-webpack-tutorial-d0b075db35ed#.71afdq2bc
-
-# TODOs #
-1. Integrate flow with webpack build (not as a separate command).
-2. Integrate mocha with webpack build (not as a separate command).
+# TODO
