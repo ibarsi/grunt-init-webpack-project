@@ -10,9 +10,7 @@ const pkg = require('./package.json');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // PATHS
-const node_modules = path.resolve(__dirname, 'node_modules');
-const bower_components = path.resolve(__dirname, 'bower_components');
-const static_path = path.resolve(__dirname, 'static');
+const src_path = path.resolve(__dirname, 'static', 'src');
 
 // POSTCSS
 const postcssImport = require('postcss-import');
@@ -39,31 +37,25 @@ let entry = !assets || !assets.js ? {} :
         prev[curr.name] = curr.src.map(function (source) {
             if (!source) { return source; }
 
-            return `${ static_path }/${ source }`;
+            return `${ src_path }/${ source }`;
         });
 
         return prev;
     }, {});
 
-// VENDORS
-entry.vendor = !assets || !assets.vendor ? [] : assets.vendor;
-
 const config = {
     entry: entry,
     module: {
         preLoaders: [
-            {
-                test: /\.js$/,
-                loader: 'eslint-loader'
-            }
         ],
         loaders: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015']
-                }
+                loader: 'babel-loader'
+            },
+            {
+                test: /\.js$/,
+                loader: 'eslint-loader'
             },
             {
                 test: /\.css$/,
@@ -78,22 +70,17 @@ const config = {
         ];
     },
     resolve: {
-        extensions: ['', '.js'],
+        extensions: [ '', '.js' ],
         modulesDirectories: [
-            node_modules,
-            bower_components
+            'node_modules',
+            'bower_components'
         ]
     },
     plugins: [
         new webpack.BannerPlugin(banner),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'common',
-            filename: 'common/common.min.js',
-            minChunks: 2
-        }),
         new webpack.ResolverPlugin(
             new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(
-                'bower.json', ['main']
+                'bower.json', Object.keys(entry)
             )
         )
     ]

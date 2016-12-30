@@ -1,8 +1,8 @@
 # Static files
 /node_modules
 /bower_components
-/static/dist
-/static/build
+**/dist
+**/build
 
 # ESLint
 .eslintcache

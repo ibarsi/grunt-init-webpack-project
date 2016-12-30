@@ -5,6 +5,7 @@
 
 // IMPORTS
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 const strip_loader = require('strip-loader');
@@ -12,8 +13,7 @@ const common = require('./webpack-common.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // PATHS
-const static_path = path.resolve(__dirname, 'static');
-const build_path = path.resolve(static_path, 'dist');
+const build_path = path.resolve(__dirname, 'static', 'dist');
 
 const config_prod = {
     output: {
@@ -23,12 +23,17 @@ const config_prod = {
     module: {
         loaders: [
             {
-                test: [/\.js$/],
+                test: [ /\.js$/ ],
                 loader: strip_loader.loader('console.log')
             }
         ]
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common',
+            filename: 'js/common.min.js',
+            minChunks: 2
+        }),
         new ExtractTextPlugin('css/[name].min.css')
     ]
 };

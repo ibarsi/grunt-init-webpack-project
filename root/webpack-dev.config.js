@@ -5,14 +5,14 @@
 
 // IMPORTS
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 const common = require('./webpack-common.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // PATHS
-const static_path = path.resolve(__dirname, 'static');
-const build_path = path.resolve(static_path, 'build');
+const build_path = path.resolve(__dirname, 'static', 'build');
 
 const config_dev = {
     devtool: 'inline-source-map',
@@ -21,6 +21,11 @@ const config_dev = {
         filename: 'js/[name].js'
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common',
+            filename: 'js/common.js',
+            minChunks: 2
+        }),
         new ExtractTextPlugin('css/[name].css')
     ]
 };
