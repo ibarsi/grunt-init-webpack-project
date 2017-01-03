@@ -23,7 +23,7 @@ const config_prod = {
     module: {
         loaders: [
             {
-                test: [/\.js$/],
+                test: [ /\.js$/ ],
                 loader: strip_loader.loader('console.log')
             }
         ]

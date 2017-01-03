@@ -53,7 +53,7 @@ const config = {
                 loader: 'babel-loader'
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 loader: 'eslint-loader'
             },
             {
@@ -69,7 +69,7 @@ const config = {
         ];
     },
     resolve: {
-        extensions: ['', '.js', '.jsx'],
+        extensions: [ '', '.js', '.jsx' ],
         modulesDirectories: [
             'node_modules',
             'bower_components'

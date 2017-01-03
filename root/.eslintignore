@@ -1,5 +1,5 @@
-node_modules/**/*
-bower_components/**/*
-static/dist/**/*
-static/build/**/*
-static/server/**/*
+**/node_modules/**/*
+**/bower_components/**/*
+**/dist/**/*
+**/build/**/*
+**/server/**/*

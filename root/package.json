@@ -1,8 +1,7 @@
 {
-  "name": "webpack_practice",
-  "title": "Webpack Practice",
-  "version": "0.1.0",
-  "homepage": "index.html",
+  "name": "grunt-init-webpack-project",
+  "title": "Grunt Init Webpack Project",
+  "version": "1.0.0",
   "author": {
     "name": "Igor Barsi"
   },
@@ -20,9 +19,9 @@
     "lint": "eslint ./ --cache",
     "test": "mocha --reporter spec --compilers js:babel-register --require ignore-styles static/src/**/*.test.js",
     "build": "npm test && flow && npm run build:dev && npm run build:server && npm run build:prod",
-    "build:dev": "webpack --config webpack-dev.config.js",
-    "build:prod": "webpack --config webpack-prod.config.js -p",
-    "build:server": "webpack --config webpack-server.config.js -p",
+    "build:dev": "webpack --config webpack-dev.config.js --progress --colors",
+    "build:prod": "webpack --config webpack-prod.config.js --progress --colors -p",
+    "build:server": "webpack --config webpack-server.config.js --progress --colors -p",
     "watch": "npm run watch:dev | npm run watch:server | npm run watch:prod",
     "watch:dev": "npm run build:dev -- --watch",
     "watch:prod": "npm run build:prod -- --watch",
