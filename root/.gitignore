@@ -1,6 +1,7 @@
 # Static files
 /node_modules
 /bower_components
+/coverage
 **/dist
 **/build
 
