@@ -7,7 +7,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const validate = require('webpack-validator');
 const strip_loader = require('strip-loader');
 const common = require('./webpack-common.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -22,12 +21,12 @@ const config_prod = {
         publicPath: '/static/dist/'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(jpe?g|png|gif)$/i,
                 loaders: [
-                    'file?name=images/[name].[ext]',
-                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                    'file-loader?name=images/[name].[ext]',
+                    'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
                 ]
             },
             {
@@ -48,4 +47,4 @@ const config_prod = {
 
 const config = merge(common, config_prod);
 
-module.exports = validate(config);
+module.exports = config;

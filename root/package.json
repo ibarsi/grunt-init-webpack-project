@@ -43,7 +43,7 @@
     "eslint-plugin-flowtype": "^2.19.0",
     "eslint-plugin-react": "^6.5.0",
     "extract-loader": "^0.1.0",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta.5",
     "flow-bin": "^0.32.0",
     "html-loader": "^0.4.4",
     "ignore-styles": "^5.0.1",
@@ -52,12 +52,11 @@
     "nyc": "^8.4.0",
     "postcss-assets": "^4.1.0",
     "postcss-cssnext": "^2.8.0",
-    "postcss-import": "^8.1.2",
+    "postcss-import": "8.1.0",
     "postcss-loader": "^0.13.0",
     "strip-loader": "^0.1.2",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
-    "webpack-merge": "^0.14.1",
-    "webpack-validator": "^2.2.7"
+    "webpack": "^2.2.0",
+    "webpack-merge": "^0.14.1"
   }
 }

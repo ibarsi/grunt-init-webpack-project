@@ -49,7 +49,7 @@ let entry = !assets || !assets.js ? {} :
 const config = {
     entry: entry,
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
@@ -68,7 +68,28 @@ const config = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap=inline!postcss-loader?sourceMap=inline')
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: 'inline'
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: 'inline',
+                                plugins: [
+                                    postcssImport,
+                                    postcssAssets,
+                                    postcssNextCSS
+                                ]
+                            }
+                        }
+                    ]
+                })
             },
             {
                 test: /\.html$/,
@@ -77,38 +98,32 @@ const config = {
             {
                 test: /\.(jpe?g|png|gif)$/i,
                 loaders: [
-                    'file?name=images/[name].[ext]'
+                    'file-loader?name=images/[name].[ext]'
                 ]
             },
             {
                 test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
                 loaders: [
-                    'file?name=fonts/[name].[ext]'
+                    'file-loader?name=fonts/[name].[ext]'
                 ]
             }
         ]
     },
-    postcss: function () {
-        return [
-            postcssImport,
-            postcssAssets,
-            postcssNextCSS
-        ];
-    },
     resolve: {
-        extensions: [ '', '.js' ],
-        modulesDirectories: [
+        extensions: [ '.js' ],
+        modules: [
             'node_modules',
             'bower_components'
         ]
     },
     plugins: [
-        new webpack.BannerPlugin(banner),
-        new webpack.ResolverPlugin(
-            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(
-                'bower.json', Object.keys(entry)
-            )
-        )
+        new webpack.BannerPlugin(banner)
+        // TODO: Do we need this?
+        // new webpack.ResolverPlugin(
+        //     new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(
+        //         'bower.json', Object.keys(entry)
+        //     )
+        // )
     ],
     cache: true
 };
