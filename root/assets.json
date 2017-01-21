@@ -7,7 +7,7 @@
             ]
         }
     ],
-    "imports": [
+    "shim": [
         "pubsub-js"
     ]
 }

@@ -12,8 +12,10 @@ const common = require('./webpack-common.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // PATHS
-const build_path = path.resolve(__dirname, 'static', 'server');
 const src_path = path.join(__dirname, 'static', 'src');
+const build_path = path.resolve(__dirname, 'static', 'server');
+const node_modules = path.resolve(__dirname, 'node_modules');
+const bower_components = path.resolve(__dirname, 'bower_components');
 
 // ASSETS
 const assets = require('./assets.json');
@@ -27,9 +29,9 @@ let modules = !assets || !assets.modules ? [] :
         });
     })).filter(element => element.indexOf('.css') < 0);
 
-// IMPORTS
-let import_loaders = !assets || !assets.imports ? [] :
-    assets.imports.map(module => ({
+// SHIM
+let import_loaders = !assets || !assets.shim ? [] :
+    assets.shim.map(module => ({
         test: require.resolve(module),
         loader: 'imports-loader?window=>{},setTimeout=>function() {}'
     }));
@@ -40,18 +42,33 @@ process.env.BABEL_ENV = 'server';
 const config_server = {
     output: {
         path: build_path,
-        filename: 'server.min.js'
+        filename: 'server.min.js',
+        publicPath: '/static/server/'
     },
     module: {
         loaders: [
             {
-                test: [/\.js$/],
-                loader: strip_loader.loader('console.log')
+                test: /\.jsx?$/,
+                loaders: [ 'babel' ],
+                exclude: [
+                    node_modules,
+                    bower_components
+                ]
             },
             {
-                test: /\.jsx?$/,
-                loaders: ['babel'],
-                exclude: /(node_modules)/
+                test: /\.(js|jsx)$/,
+                loader: 'imports-loader?window=>{},setTimeout=>function() {}'
+            },
+            {
+                test: /\.(jpe?g|png|gif)$/i,
+                loaders: [
+                    'file?name=images/[name].[ext]',
+                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                ]
+            },
+            {
+                test: /\.(js|jsx)$/,
+                loader: strip_loader.loader('console.log')
             }
         ].concat(import_loaders)
     },
