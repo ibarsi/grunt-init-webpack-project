@@ -4,17 +4,5 @@
     ],
     "presets": [
         "es2015"
-    ],
-    "env": {
-        "server": {
-            "plugins": [
-                [
-                    "babel-plugin-transform-require-ignore",
-                    {
-                        "extensions": [".css"]
-                    }
-                ]
-            ]
-        }
-    }
+    ]
 }
