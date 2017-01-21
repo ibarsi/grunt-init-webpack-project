@@ -59,6 +59,7 @@ exports.template = function(grunt, init, done) {
 
         // NOTE: Must be matched up manually with package.json in /root (it gets overwritten).
         props.devDependencies = {
+            "babel-core": "^6.14.0",
             "babel-eslint": "^6.1.2",
             "babel-loader": "^6.2.5",
             "babel-plugin-transform-flow-strip-types": "^6.14.0",
@@ -74,11 +75,15 @@ exports.template = function(grunt, init, done) {
             "eslint-plugin-compat": "^0.1.3",
             "eslint-plugin-flowtype": "^2.19.0",
             "eslint-plugin-react": "^6.5.0",
+            "extract-loader": "^0.1.0",
             "extract-text-webpack-plugin": "^1.0.1",
             "flow-bin": "^0.32.0",
+            "html-loader": "^0.4.4",
             "ignore-styles": "^5.0.1",
+            "image-webpack-loader": "^3.1.0",
             "mocha": "^3.1.2",
             "nyc": "^8.4.0",
+            "postcss-assets": "^4.1.0",
             "postcss-cssnext": "^2.8.0",
             "postcss-import": "^8.1.2",
             "postcss-loader": "^0.13.0",
