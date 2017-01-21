@@ -18,10 +18,18 @@ const build_path = path.resolve(__dirname, 'static', 'dist');
 const config_prod = {
     output: {
         path: build_path,
-        filename: '[name]/[name].min.js'
+        filename: '[name]/[name].min.js',
+        publicPath: '/static/dist/'
     },
     module: {
         loaders: [
+            {
+                test: /\.(jpe?g|png|gif)$/i,
+                loaders: [
+                    'file?name=images/[name].[ext]',
+                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                ]
+            },
             {
                 test: [ /\.js$/ ],
                 loader: strip_loader.loader('console.log')

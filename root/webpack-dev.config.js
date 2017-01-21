@@ -18,7 +18,8 @@ const config_dev = {
     devtool: 'inline-source-map',
     output: {
         path: build_path,
-        filename: '[name]/[name].js'
+        filename: '[name]/[name].js',
+        publicPath: '/static/build/'
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({

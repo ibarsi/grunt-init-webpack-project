@@ -49,9 +49,8 @@ npm install
 Build tasks are configured via npm scripts (can be seen in `package.json`).
 
 ```
-npm run build       // Runs production build workflow.
-npm run build-dev   // Runs development build workflow.
-npm run watch       // Runs development build workflow and watches for changes.
+npm run build       // Runs build workflow.
+npm run watch       // Runs build workflow and watches for changes.
 ```
 
 ## That's it! ##

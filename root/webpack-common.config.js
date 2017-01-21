@@ -11,9 +11,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // PATHS
 const src_path = path.resolve(__dirname, 'static', 'src');
+const node_modules = path.resolve(__dirname, 'node_modules');
+const bower_components = path.resolve(__dirname, 'bower_components');
 
 // POSTCSS
 const postcssImport = require('postcss-import');
+const postcssAssets = require('postcss-assets');
 const postcssNextCSS = require('postcss-cssnext');
 
 // BANNER
@@ -45,26 +48,49 @@ let entry = !assets || !assets.modules ? {} :
 const config = {
     entry: entry,
     module: {
-        preLoaders: [
-        ],
         loaders: [
             {
                 test: /\.(js|jsx)$/,
-                loader: 'babel-loader'
+                loader: 'babel-loader',
+                exclude: [
+                    node_modules,
+                    bower_components
+                ]
             },
             {
                 test: /\.(js|jsx)$/,
-                loader: 'eslint-loader'
+                loader: 'eslint-loader',
+                exclude: [
+                    node_modules,
+                    bower_components
+                ]
             },
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap=inline!postcss-loader?sourceMap=inline')
+            },
+            {
+                test: /\.html$/,
+                loader: 'extract-loader!html-loader'
+            },
+            {
+                test: /\.(jpe?g|png|gif)$/i,
+                loaders: [
+                    'file?name=images/[name].[ext]'
+                ]
+            },
+            {
+                test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+                loaders: [
+                    'file?name=fonts/[name].[ext]'
+                ]
             }
         ]
     },
     postcss: function () {
         return [
             postcssImport,
+            postcssAssets,
             postcssNextCSS
         ];
     },
@@ -82,7 +108,8 @@ const config = {
                 'bower.json', Object.keys(entry)
             )
         )
-    ]
+    ],
+    cache: true
 };
 
 module.exports = config;
