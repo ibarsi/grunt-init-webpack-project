@@ -4,3 +4,8 @@
 .*/coverage/.*
 .*/dist/.*
 .*/build/.*
+.*\.config\.js
+.*\.test\.js
+
+[options]
+all=true

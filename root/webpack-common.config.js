@@ -8,6 +8,7 @@ const path = require('path');
 const webpack = require('webpack');
 const pkg = require('./package.json');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const FlowStatusWebpackPlugin = require('flow-status-webpack-plugin');
 
 // PATHS
 const src_path = path.resolve(__dirname, 'static', 'src');
@@ -108,7 +109,11 @@ const config = {
             new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(
                 'bower.json', Object.keys(entry)
             )
-        )
+        ),
+        new webpack.NoErrorsPlugin(),
+        new FlowStatusWebpackPlugin({
+            failOnError: true
+        })
     ],
     cache: true
 };
