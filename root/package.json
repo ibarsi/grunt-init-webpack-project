@@ -17,7 +17,7 @@
   "scripts": {
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "lint": "eslint ./ --cache",
-    "test": "nyc mocha --colors --reporter spec --compilers js:babel-register --require ignore-styles static/src/**/*.test.js",
+    "test": "NODE_ENV=test nyc mocha --colors --reporter spec --compilers js:babel-register --require ignore-styles static/src/**/*.test.js",
     "build": "npm test && flow && npm run build:dev && npm run build:prod",
     "build:dev": "webpack --config webpack-dev.config.js --progress --colors",
     "build:prod": "webpack --config webpack-prod.config.js --progress --colors -p",
