@@ -52,18 +52,13 @@ const config = {
         rules: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
                 exclude: [
                     node_modules,
                     bower_components
-                ]
-            },
-            {
-                test: /\.js$/,
-                loader: 'eslint-loader',
-                exclude: [
-                    node_modules,
-                    bower_components
+                ],
+                use: [
+                    'babel-loader',
+                    'eslint-loader'
                 ]
             },
             {
@@ -93,18 +88,31 @@ const config = {
             },
             {
                 test: /\.html$/,
-                loader: 'extract-loader!html-loader'
+                use: [
+                    'extract-loader',
+                    'html-loader'
+                ]
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
-                loaders: [
-                    'file-loader?name=images/[name].[ext]'
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'images/[name].[ext]'
+                        }
+                    }
                 ]
             },
             {
                 test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-                loaders: [
-                    'file-loader?name=fonts/[name].[ext]'
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'fonts/[name].[ext]'
+                        }
+                    }
                 ]
             }
         ]
@@ -114,16 +122,15 @@ const config = {
         modules: [
             'node_modules',
             'bower_components'
-        ]
+        ],
+        descriptionFiles: [
+            'package.json',
+            'bower.json'
+        ],
+        mainFields: Object.keys(entry)
     },
     plugins: [
-        new webpack.BannerPlugin(banner)
-        // TODO: Do we need this?
-        // new webpack.ResolverPlugin(
-        //     new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(
-        //         'bower.json', Object.keys(entry)
-        //     )
-        // )
+        new webpack.BannerPlugin({ banner })
     ],
     cache: true
 };

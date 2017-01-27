@@ -21,12 +21,16 @@ const config_dev = {
         publicPath: '/static/build/'
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': { NODE_ENV: JSON.stringify('development') }
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'js/common.js',
             minChunks: 2
         }),
-        new ExtractTextPlugin('css/[name].css')
+        new ExtractTextPlugin('css/[name].css'),
+        new webpack.NamedModulesPlugin()
     ]
 };
 
