@@ -73,17 +73,7 @@ const config = {
                                 sourceMap: 'inline'
                             }
                         },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: 'inline',
-                                plugins: [
-                                    postcssImport,
-                                    postcssAssets,
-                                    postcssNextCSS
-                                ]
-                            }
-                        }
+                        'postcss-loader'
                     ]
                 })
             },
@@ -134,6 +124,16 @@ const config = {
         new webpack.BannerPlugin({ banner }),
         new FlowStatusWebpackPlugin({
             failOnError: true
+        }),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                context: src_path,
+                postcss: [
+                    postcssImport,
+                    postcssAssets,
+                    postcssNextCSS
+                ]
+            }
         })
     ],
     cache: true
