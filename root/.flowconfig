@@ -5,3 +5,8 @@
 .*/dist/.*
 .*/build/.*
 .*/server/.*
+.*\.config\.js
+.*\.test\.js
+
+[options]
+all=true

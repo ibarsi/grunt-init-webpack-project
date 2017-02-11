@@ -59,5 +59,4 @@ Get crackin'
 Also, best/funniest Webpack tutorial ever (helped me a ton): https://medium.com/@dtothefp/why-can-t-anyone-write-a-simple-webpack-tutorial-d0b075db35ed#.71afdq2bc
 
 # TODOs #
-1. Integrate flow with webpack build (not as a separate command).
 2. Integrate mocha with webpack build (not as a separate command).

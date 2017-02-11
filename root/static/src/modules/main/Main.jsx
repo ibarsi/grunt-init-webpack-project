@@ -5,7 +5,7 @@
 import React from 'react';
 import PubSub from 'pubsub-js';
 
-import Greeting from '../../components/greeting/Greeting.jsx';
+import Greeting from '../../components/Greeting.jsx';
 import { toggle } from './actions';
 import reducer from './reducer';
 import './main.css';

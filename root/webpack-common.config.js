@@ -8,6 +8,7 @@ const path = require('path');
 const webpack = require('webpack');
 const pkg = require('./package.json');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const FlowStatusWebpackPlugin = require('flow-status-webpack-plugin');
 
 // PATHS
 const src_path = path.resolve(__dirname, 'static', 'src');
@@ -48,66 +49,91 @@ let entry = !assets || !assets.modules ? {} :
 const config = {
     entry: entry,
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(js|jsx)$/,
-                loader: 'babel-loader',
                 exclude: [
                     node_modules,
                     bower_components
-                ]
-            },
-            {
-                test: /\.(js|jsx)$/,
-                loader: 'eslint-loader',
-                exclude: [
-                    node_modules,
-                    bower_components
+                ],
+                use: [
+                    'babel-loader',
+                    'eslint-loader'
                 ]
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap=inline!postcss-loader?sourceMap=inline')
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: 'inline'
+                            }
+                        },
+                        'postcss-loader'
+                    ]
+                })
             },
             {
                 test: /\.html$/,
-                loader: 'extract-loader!html-loader'
+                use: [
+                    'extract-loader',
+                    'html-loader'
+                ]
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
-                loaders: [
-                    'file?name=images/[name].[ext]'
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'images/[name].[ext]'
+                        }
+                    }
                 ]
             },
             {
                 test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-                loaders: [
-                    'file?name=fonts/[name].[ext]'
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'fonts/[name].[ext]'
+                        }
+                    }
                 ]
             }
         ]
     },
-    postcss: function () {
-        return [
-            postcssImport,
-            postcssAssets,
-            postcssNextCSS
-        ];
-    },
     resolve: {
-        extensions: [ '', '.js', '.jsx' ],
-        modulesDirectories: [
+        extensions: [ '.js', '.jsx' ],
+        modules: [
             'node_modules',
             'bower_components'
-        ]
+        ],
+        descriptionFiles: [
+            'package.json',
+            'bower.json'
+        ],
+        mainFields: Object.keys(entry)
     },
     plugins: [
-        new webpack.BannerPlugin(banner),
-        new webpack.ResolverPlugin(
-            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(
-                'bower.json', Object.keys(entry)
-            )
-        )
+        new webpack.BannerPlugin({ banner }),
+        // new FlowStatusWebpackPlugin({
+        //     failOnError: true
+        // }),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                context: src_path,
+                postcss: [
+                    postcssImport,
+                    postcssAssets,
+                    postcssNextCSS
+                ]
+            }
+        })
     ],
     cache: true
 };

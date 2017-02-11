@@ -7,7 +7,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const validate = require('webpack-validator');
 const common = require('./webpack-common.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -22,15 +21,19 @@ const config_dev = {
         publicPath: '/static/build/'
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': { NODE_ENV: JSON.stringify('development') }
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'common/common.js',
             minChunks: 2
         }),
-        new ExtractTextPlugin('[name]/[name].css')
+        new ExtractTextPlugin('[name]/[name].css'),
+        new webpack.NamedModulesPlugin()
     ]
 };
 
 const config = merge(common, config_dev);
 
-module.exports = validate(config);
+module.exports = config;

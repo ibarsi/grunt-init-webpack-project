@@ -3,18 +3,13 @@
         "transform-flow-strip-types"
     ],
     "presets": [
-        "es2015",
+        ["es2015", { "modules": false }],
         "react"
     ],
     "env": {
-        "server": {
-            "plugins": [
-                [
-                    "babel-plugin-transform-require-ignore",
-                    {
-                        "extensions": [".css"]
-                    }
-                ]
+        "test": {
+            "presets": [
+                "es2015"
             ]
         }
     }

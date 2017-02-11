@@ -1,5 +1,5 @@
 /* ==================================================
-   GREETING
+    GREETING
 ================================================== */
 
 import React from 'react';
@@ -7,7 +7,7 @@ import React from 'react';
 import './greeting.css';
 
 const Greeting = ({ title }) =>
-    <p>
+    <p className={ 'test-class' }>
         { title }
     </p>;
 
