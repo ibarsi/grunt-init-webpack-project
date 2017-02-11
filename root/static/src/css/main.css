@@ -1,7 +1,11 @@
 /* ==================================================
-   MAIN
+    MAIN
 ================================================== */
 
+:root {
+    --colour-white: #FFFFFF;
+}
+
 .test-class {
-    color: #FFFFFF;
+    color: var(--colour-white);
 }

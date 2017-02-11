@@ -7,7 +7,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const validate = require('webpack-validator');
 const strip_loader = require('strip-loader');
 const common = require('./webpack-common.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -22,30 +21,64 @@ const config_prod = {
         publicPath: '/static/dist/'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(jpe?g|png|gif)$/i,
-                loaders: [
-                    'file?name=images/[name].[ext]',
-                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'images/[name].[ext]'
+                        }
+                    },
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            bypassOnDebug: true,
+                            optimizationLevel: 7,
+                            interlaced: false
+                        }
+                    }
                 ]
             },
             {
                 test: [ /\.js$/ ],
-                loader: strip_loader.loader('console.log')
+                use: [
+                    strip_loader.loader('console.log')
+                ]
             }
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': { NODE_ENV: JSON.stringify('production') }
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'js/common.min.js',
             minChunks: 2
         }),
-        new ExtractTextPlugin('css/[name].min.css')
+        new ExtractTextPlugin('css/[name].min.css'),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                screw_ie8: true,
+                conditionals: true,
+                unused: true,
+                comparisons: true,
+                sequences: true,
+                dead_code: true,
+                evaluate: true,
+                if_return: true,
+                join_vars: true
+            },
+            output: {
+                comments: false
+            }
+        })
     ]
 };
 
 const config = merge(common, config_prod);
 
-module.exports = validate(config);
+module.exports = config;

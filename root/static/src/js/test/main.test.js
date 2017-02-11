@@ -1,5 +1,5 @@
 /* ==================================================
-   TEST - MAIN
+    MAIN
 ================================================== */
 
 import { expect } from 'chai';
@@ -7,10 +7,10 @@ import main from '../main';
 
 describe('Main', () => {
     describe('Main Function', () => {
-      it('Returns "MAIN APP"', () => {
-        let result = main();
+        it('Returns "MAIN APP"', () => {
+            const result = main();
 
-        expect(result).to.equal('MAIN APP');
-      });
+            expect(result).to.equal('MAIN APP');
+        });
     });
 });

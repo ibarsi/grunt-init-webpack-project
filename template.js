@@ -48,7 +48,7 @@ exports.template = function(grunt, init, done) {
         props.scripts = {
             "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
             "lint": "eslint ./ --cache",
-            "test": "nyc mocha --reporter spec --compilers js:babel-register --require ignore-styles static/src/**/*.test.js",
+            "test": "NODE_ENV=test nyc mocha --colors --reporter spec --compilers js:babel-register --require ignore-styles static/src/**/*.test.js",
             "build": "npm test && flow && npm run build:dev && npm run build:prod",
             "build:dev": "webpack --config webpack-dev.config.js --progress --colors",
             "build:prod": "webpack --config webpack-prod.config.js --progress --colors -p",
@@ -76,8 +76,9 @@ exports.template = function(grunt, init, done) {
             "eslint-plugin-flowtype": "^2.19.0",
             "eslint-plugin-react": "^6.5.0",
             "extract-loader": "^0.1.0",
-            "extract-text-webpack-plugin": "^1.0.1",
+            "extract-text-webpack-plugin": "^2.0.0-beta.5",
             "flow-bin": "^0.32.0",
+            "flow-status-webpack-plugin": "^0.1.7",
             "html-loader": "^0.4.4",
             "ignore-styles": "^5.0.1",
             "image-webpack-loader": "^3.1.0",
@@ -85,13 +86,12 @@ exports.template = function(grunt, init, done) {
             "nyc": "^8.4.0",
             "postcss-assets": "^4.1.0",
             "postcss-cssnext": "^2.8.0",
-            "postcss-import": "^8.1.2",
+            "postcss-import": "8.1.0",
             "postcss-loader": "^0.13.0",
             "strip-loader": "^0.1.2",
             "style-loader": "^0.13.1",
-            "webpack": "^1.13.2",
-            "webpack-merge": "^0.14.1",
-            "webpack-validator": "^2.2.7"
+            "webpack": "^2.2.0",
+            "webpack-merge": "^0.14.1"
         };
 
         // Generate package.json file, used by npm and grunt.
