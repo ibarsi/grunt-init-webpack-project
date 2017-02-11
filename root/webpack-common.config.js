@@ -8,6 +8,7 @@ const path = require('path');
 const webpack = require('webpack');
 const pkg = require('./package.json');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const FlowStatusWebpackPlugin = require('flow-status-webpack-plugin');
 
 // PATHS
 const src_path = path.resolve(__dirname, 'static', 'src');
@@ -130,7 +131,10 @@ const config = {
         mainFields: Object.keys(entry)
     },
     plugins: [
-        new webpack.BannerPlugin({ banner })
+        new webpack.BannerPlugin({ banner }),
+        new FlowStatusWebpackPlugin({
+            failOnError: true
+        })
     ],
     cache: true
 };
