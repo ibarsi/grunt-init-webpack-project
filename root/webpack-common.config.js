@@ -27,7 +27,6 @@ Title: ${ pkg.title }
 Version: ${ pkg.version }
 Author: ${ pkg.author.name }
 Repository: ${ pkg.repository.url }
-Date: ${ new Date().toISOString() }
 =====
 `;
 
