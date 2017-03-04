@@ -4,7 +4,7 @@
 
 import '../css/main.css';
 
-var main = function () {
+const main = function () {
     return 'MAIN APP';
 };
 
