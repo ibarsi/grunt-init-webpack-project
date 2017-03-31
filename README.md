@@ -7,7 +7,7 @@ Outlined below are the steps needed to get the solution up and running from a cl
 My personal Webpack configuration and workflow for front-end code, initialized via grunt-init.
 
 ### Feature Support: ###
-* ES6 (ES2015)
+* ES6 (ES2017)
 * ESLint
 * PostCSS
     * Import
